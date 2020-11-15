@@ -1,0 +1,30 @@
+{
+  "name": "api-nodejs-ecommerce-covid",
+  "version": "1.0.0",
+  "description": "API REST to ecommerce of products for prevention COVID-19.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvalverdeu/api-nodejs-ecommerce-covid.git"
+  },
+  "author": "fvalverdeu@gmail.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/fvalverdeu/api-nodejs-ecommerce-covid/issues"
+  },
+  "homepage": "https://github.com/fvalverdeu/api-nodejs-ecommerce-covid#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.14",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
