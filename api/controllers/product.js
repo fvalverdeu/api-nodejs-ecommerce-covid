@@ -5,6 +5,7 @@ exports.getAll = (req, res, next) => {
     Product.find()
         .exec()
         .then(docs => {
+          // console.log(docs)
             res.status(200).json(docs)
         })
         .catch(err => {
@@ -23,8 +24,10 @@ exports.create = (req, res, next) => {
         model: req.body.model,
         quantity: req.body.quantity,
         price: req.body.price,
-        categories: req.body.categories,
-        images: req.body.images
+        category: req.body.category,
+        // categories: req.body.categories,
+        // images: req.body.images,
+        status: 'ACTIVE'
       });
       product.save()
         .then(result => {
@@ -60,8 +63,9 @@ exports.update = (req, res, next) => {
         model: req.body.model,
         quantity: req.body.quantity,
         price: req.body.price,
-        categories: req.body.categories,
-        images: req.body.images
+        category: req.body.category
+        // categories: req.body.categories,
+        // images: req.body.images
     };
     Product.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
       .exec()
@@ -89,18 +93,41 @@ exports.delete = (req, res, next) => {
 
 exports.updateImage = (req, res, next) => {
     const _id = req.params.id;
-    const body = {
-        image: '/uploads/' + req.file.filename
-    };
-    Product.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
+    let images = [];
+    Product.findById(_id, (error, response) => {
+      console.log('product find', response)
+      images = response.images;
+      if (error) return res.status(404).json({ message: "Error to find product!!" });
+      console.log('find', images)
+      console.log(`req.position: ${req.body.position}, req.file: ${req.file.filename}`)
+      if (req.body.position === 0 || req.body.position && req.file) {
+        const body = {
+          position: req.body.position,
+          image: `/uploads/${_id}/${req.file.filename}`//'/uploads/' + req.file.filename
+        };
+        if (images.length > body.position) {
+          console.log('if', images);
+          images[body.position] = body.image;
+        } else {
+          console.log('else', images);
+          images.push(body.image);
+        }
+      } else {
+        return res.status(404).json({ message: "Error to request!!" });
+      }
+      console.log('set', images)
+    Product.findOneAndUpdate({ _id: _id }, { $set: {images: images} }, {new: true})
       .exec()
       .then(doc => {
+        console.log('update', images)
         res.status(200).json({
-            // image: doc.image
             image: doc
         });
       })
       .catch(err => {
         res.status(500).json({ error: err });
       });
+    });
+
+    
   };

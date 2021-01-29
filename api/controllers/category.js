@@ -17,7 +17,8 @@ exports.create = (req, res, next) => {
         _id: mongoose.Types.ObjectId(),
         title: req.body.title,
         parent: req.body.parent,
-        path: req.body.path
+        path: req.body.path,
+        status: 'ACTIVE'
       });
       category.save()
         .then(result => {

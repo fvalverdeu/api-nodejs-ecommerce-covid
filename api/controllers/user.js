@@ -20,7 +20,8 @@ exports.create = (req, res, next) => {
         rol: req.body.rol,
         name: req.body.name,
         lastname: req.body.lastname,
-        document: req.body.document
+        document: req.body.document,
+        status: 'ACTIVE'
       });
       user.save()
         .then(result => {

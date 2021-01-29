@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     document: { type: String, required: true },
+    status: { type: String, required: true }
 }, { versionKey: false });
 
 module.exports = mongoose.model('User', userSchema);
