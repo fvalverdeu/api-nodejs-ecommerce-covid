@@ -7,7 +7,7 @@ const userRoutes = require('./api/routes/user');
 const categoryRoutes = require('./api/routes/category');
 const productRoutes = require('./api/routes/product');
 
-const url = 'mongodb+srv://newUser:bz2vLGB3ZSJdWAJB@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
+const url = process.env.MONGODB || 'mongodb+srv://newUser:bz2vLGB3ZSJdWAJB@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
 
 mongoose.connect(url, {
     useCreateIndex: true,
