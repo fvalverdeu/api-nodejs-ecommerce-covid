@@ -2,6 +2,9 @@
   "name": "api-nodejs-ecommerce-covid",
   "version": "1.0.0",
   "description": "API REST to ecommerce of products for prevention COVID-19.",
+  "engines": {
+    "node": "12.18.3"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
