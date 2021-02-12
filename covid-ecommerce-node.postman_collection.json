@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "d9324a0e-10a1-4456-8805-4033d91e332d",
+		"name": "covid-ecommerce-node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "auth/sign-up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"cvasquez.arenaza@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"Cynthia\",\r\n    \"lastname\": \"Vasquez Arenaza\",\r\n    \"document\": \"44413518\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/sign-up",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth/sign-in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fvalverdeu@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/sign-in",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "create/category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Nebulizador\",\r\n    \"parent\": \"6011e93c77a6301e16850a10\",\r\n    \"path\": \"uploads/terapia/nebulizador.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list/category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/5fefc649917abb4698b74585",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"5fefc649917abb4698b74585"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Control y Seguimiento\",\r\n    \"parent\": \"\",\r\n    \"path\": \"uploads/control/control.png\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/5fefc66c917abb4698b74586",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"5fefc66c917abb4698b74586"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/5fefc66c917abb4698b74586",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"5fefc66c917abb4698b74586"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "create/product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sku\": \"P018\",\r\n    \"name\": \"Balón Oxígeno 10L\",\r\n    \"description\": \"El balón de oxígeno es un recipiente de metal que contiene oxígeno a presión. Se necesita una orden médica para recibir terapia de oxígeno, esta incluirá la cantidad que necesita.\",\r\n    \"unit\": \"1Un\",\r\n    \"expiration\": \"31-12-2022\",\r\n    \"model\": \"\",\r\n    \"quantity\": \"5\",\r\n    \"price\": \"800\",\r\n    \"category\": \"6011e93c77a6301e16850a10\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list/products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product/5ff0e0b9c68e454f64188f19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"5ff0e0b9c68e454f64188f19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product/6012008577a6301e16850a1b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"6012008577a6301e16850a1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sku\": \"P002\",\r\n    \"name\": \"Alcohol 95°\",\r\n    \"description\": \"Alcohol de 95%\",\r\n    \"unit\": \"1 botella 1L\",\r\n    \"expiration\": \"31-12-2022\",\r\n    \"model\": \"\",\r\n    \"quantity\": \"100\",\r\n    \"price\": 15,\r\n    \"category\": \"5fefc649917abb4698b74585\",\r\n    \"status\": \"ACTIVE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/product/600b727a1a4be3a70c51e15c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"600b727a1a4be3a70c51e15c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/product//_category/_id/image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Fernando/Clases/AcademiaTemple/Angular-m2/resources/prevencion/gel.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/product/prevencion/5ff0e085c68e454f64188f18/image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"prevencion",
+								"5ff0e085c68e454f64188f18",
+								"image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create/user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mhuarcaya@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"Miguel\",\r\n    \"lastname\": \"Huarcaya\",\r\n    \"document\": \"44455599\",\r\n    \"rol\": \"CLIENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/6025e4f7a1f88e1c5af851c2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"6025e4f7a1f88e1c5af851c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fvalverdeu@gmail.com\",\r\n    \"name\": \"Fernando\",\r\n    \"lastname\": \"Valverde\",\r\n    \"document\": \"43298887\",\r\n    \"rol\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/602624d59f90cb179d50544f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"602624d59f90cb179d50544f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/6025e58ba1f88e1c5af851c4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"6025e58ba1f88e1c5af851c4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api public list/product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api-nodejs-ecommerce-covid.herokuapp.com/product",
+					"protocol": "https",
+					"host": [
+						"api-nodejs-ecommerce-covid",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
