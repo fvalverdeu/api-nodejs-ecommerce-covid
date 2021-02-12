@@ -3,11 +3,12 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const authRoutes = require('./api/routes/auth');
 const userRoutes = require('./api/routes/user');
 const categoryRoutes = require('./api/routes/category');
 const productRoutes = require('./api/routes/product');
 
-const url = process.env.MONGODB || 'mongodb+srv://newUser:bz2vLGB3ZSJdWAJB@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
+const url = 'mongodb+srv://newUser:' + process.env.MONGO_ATLAS_PW + '@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
 
 mongoose.connect(url, {
     useCreateIndex: true,
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
 
+app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes)

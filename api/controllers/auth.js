@@ -53,6 +53,7 @@ exports.signIn = (req, res, next) => {
         });
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+          console.log(user[0].password);
           if (err) {
             return res.status(500).json({
               message: "Error Interno, en la validación de la contraseña"
