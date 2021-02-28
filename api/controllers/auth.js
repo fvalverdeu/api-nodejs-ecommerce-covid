@@ -70,7 +70,7 @@ exports.signIn = (req, res, next) => {
             const token = jwt.sign(
               payload,
               process.env.JWT_KEY,
-              { expiresIn: "5h"}
+              { expiresIn: "1h"}
             );
             return res.status(200).json({
               token: token
