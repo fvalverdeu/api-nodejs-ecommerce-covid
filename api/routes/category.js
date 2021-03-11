@@ -13,6 +13,8 @@ router.put("/:id", CategoryController.update);
 
 router.delete("/:id", CategoryController.delete);
 
+router.get("/main/list", CategoryController.getMain);
+
 
 
 module.exports = router;

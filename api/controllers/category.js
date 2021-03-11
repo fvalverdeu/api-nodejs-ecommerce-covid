@@ -74,3 +74,17 @@ exports.delete = (req, res, next) => {
         });
 };
 
+exports.getMain = (req, res, next) => {
+  console.log('main')
+  Category.find({parent: ""})
+    .exec()
+    .then(doc => {
+      if (!doc) {
+        return res.status(404).json({ message: "Not found" });
+      }
+      res.status(200).json(doc);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err });
+    });
+};
