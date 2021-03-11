@@ -18,6 +18,8 @@ router.delete("/:id", ProductController.delete);
 
 router.put("/:id/image", upload.image.single('image'), ProductController.updateImage);
 
+router.get("/category/:id", ProductController.getByCategory);
+
 // router.put("/:id", idProtected, ProductController.update);
 
 // router.delete("/:id", idProtected, ProductController.delete);

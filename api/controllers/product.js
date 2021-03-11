@@ -131,3 +131,17 @@ exports.updateImage = (req, res, next) => {
 
     
   };
+
+  exports.getByCategory = (req, res, next) => {
+    Product.find({category: req.params.id})
+      .exec()
+      .then(doc => {
+        if (!doc) {
+          return res.status(404).json({ message: "Not found" });
+        }
+        res.status(200).json(doc);
+      })
+      .catch(err => {
+        res.status(500).json({ error: err });
+      });
+  };
