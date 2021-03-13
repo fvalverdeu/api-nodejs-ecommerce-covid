@@ -12,6 +12,7 @@ const productSchema = mongoose.Schema({
     price: {type: Number, required: true},
     // categories: [String], 
     category: {type: String, required: true},
+    maker: {type: String, required: true},
     images: [String],
     status: { type: String, required: true }
 }, {versionKey: false });

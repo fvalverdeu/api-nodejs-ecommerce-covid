@@ -5,7 +5,7 @@ exports.getAll = (req, res, next) => {
     Product.find()
         .exec()
         .then(docs => {
-          // console.log(docs)
+          console.log('docs')
             res.status(200).json(docs)
         })
         .catch(err => {
@@ -25,6 +25,7 @@ exports.create = (req, res, next) => {
         quantity: req.body.quantity,
         price: req.body.price,
         category: req.body.category,
+        maker: req.body.maker,
         // categories: req.body.categories,
         // images: req.body.images,
         status: 'ACTIVE'
@@ -63,7 +64,8 @@ exports.update = (req, res, next) => {
         model: req.body.model,
         quantity: req.body.quantity,
         price: req.body.price,
-        category: req.body.category
+        category: req.body.category,
+        maker: req.body.maker
         // categories: req.body.categories,
         // images: req.body.images
     };
@@ -145,3 +147,22 @@ exports.updateImage = (req, res, next) => {
         res.status(500).json({ error: err });
       });
   };
+
+  
+exports.getAllPaginate = (req, res, next) => {
+  console.log('params', req.params)
+  const skip = parseInt(req.params.skip);
+  const limit= parseInt(req.params.limit);
+  const { body } = req.body;
+  Product.find()
+      .skip(skip)
+      .limit(limit)
+      .exec()
+      .then(docs => {
+          console.log('other', docs)
+          res.status(200).json(docs)
+      })
+      .catch(err => {
+          res.status(500).json({ error: err });
+      });
+};
