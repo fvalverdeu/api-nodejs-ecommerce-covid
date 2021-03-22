@@ -150,16 +150,27 @@ exports.updateImage = (req, res, next) => {
 
   
 exports.getAllPaginate = (req, res, next) => {
-  console.log('params', req.params)
+  // console.log('params', req.params)
   const skip = parseInt(req.params.skip);
   const limit= parseInt(req.params.limit);
-  const { body } = req.body;
-  Product.find()
+  const body = req.body;
+  console.log(body)
+  let query = {};
+  let sort = {};
+  body.name ? query.name = new RegExp(`${body.name}`,'i') : '';
+  body.sku ? query.sku = new RegExp(`${body.sku}`,'i') : '';
+  body.category ? query.category = body.category : '';
+  body.price ? query.price = {$gte: body.price.minPrice, $lte: body.price.maxPrice} : '';
+  body.maker ? query.maker = body.maker : '';
+  body.sort ? (body.sort === 'ASC' ? sort = {price: 1} : sort = {price: -1}) : {sku: 1};
+  console.log(sort)
+  Product.find(query)
       .skip(skip)
       .limit(limit)
+      .sort(sort)
       .exec()
       .then(docs => {
-          console.log('other', docs)
+          // console.log('other', docs)
           res.status(200).json(docs)
       })
       .catch(err => {
