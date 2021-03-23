@@ -20,7 +20,7 @@ router.put("/:id/image", upload.image.single('image'), ProductController.updateI
 
 router.get("/category/:id", ProductController.getByCategory);
 
-router.get("/page/:limit/:skip", ProductController.getAllPaginate);
+router.post("/page/:limit/:skip", ProductController.getAllPaginate);
 // router.put("/:id", idProtected, ProductController.update);
 
 // router.delete("/:id", idProtected, ProductController.delete);
