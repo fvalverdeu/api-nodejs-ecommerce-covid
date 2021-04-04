@@ -1,96 +1,76 @@
-const mongoose = require("mongoose");
-const Product = require("../models/product");
+const { Product } = require('../models');
 
-exports.getAll = (req, res, next) => {
-    Product.find()
-        .exec()
-        .then(docs => {
-          console.log('docs')
-            res.status(200).json(docs)
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
+exports.getAll = async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.create = (req, res, next) => {
-      const product = new Product({
-        _id: mongoose.Types.ObjectId(),
-        sku: req.body.sku,
-        name: req.body.name,
-        description: req.body.description,
-        unit: req.body.unit,
-        expiration: req.body.expiration,
-        model: req.body.model,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        category: req.body.category,
-        maker: req.body.maker,
-        // categories: req.body.categories,
-        // images: req.body.images,
-        status: 'ACTIVE'
-      });
-      product.save()
-        .then(result => {
-            res.status(201).json(result);
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
-};
-
-exports.get = (req, res, next) => {
-  Product.findById(req.params.id)
-    .exec()
-    .then(doc => {
-      if (!doc) {
-        return res.status(404).json({ message: "Not found" });
-      }
-      res.status(200).json(doc);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err });
+exports.create = async (req, res) => {
+  try {
+    const product = await Product.create({
+      sku: req.body.sku,
+      name: req.body.name,
+      description: req.body.description,
+      unit: req.body.unit,
+      expiration: req.body.expiration,
+      model: req.body.model,
+      quantity: req.body.quantity,
+      price: req.body.price,
+      category: req.body.category,
+      maker: req.body.maker,
     });
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.update = (req, res, next) => {
-    const _id = req.params.id;
-    const body = {
-        sku: req.body.sku,
-        name: req.body.name,
-        description: req.body.description,
-        unit: req.body.unit,
-        expiration: req.body.expiration,
-        model: req.body.model,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        category: req.body.category,
-        maker: req.body.maker
-        // categories: req.body.categories,
-        // images: req.body.images
+exports.get = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+exports.update = async (req, res,) => {
+  const _id = req.params.id;
+  try {
+    const dataProduct = {
+      sku: req.body.sku,
+      name: req.body.name,
+      description: req.body.description,
+      unit: req.body.unit,
+      expiration: req.body.expiration,
+      model: req.body.model,
+      quantity: req.body.quantity,
+      price: req.body.price,
+      category: req.body.category,
+      maker: req.body.maker,
     };
-    Product.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
-      .exec()
-      .then(doc => {
-        res.status(200).json(doc);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err });
-      });
+    const product = await Product.findOneAndUpdate({ _id, }, dataProduct, { new: true });
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.delete = (req, res, next) => {
-    const _id = req.params.id;
-    Product.deleteOne({ _id: _id })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                _id: _id,
-            });
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
+exports.delete = async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const product = await Product.deleteOne({ _id });
+    res.status(200).json({ _id });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
 exports.updateImage = (req, res, next) => {
@@ -130,50 +110,34 @@ exports.updateImage = (req, res, next) => {
         res.status(500).json({ error: err });
       });
     });
+}
 
-    
-  };
+exports.getByCategory = async (req, res) => {
+  try {
+    const { id: category } = req.params;
+    const products = await Product.find({ category });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
 
-  exports.getByCategory = (req, res, next) => {
-    Product.find({category: req.params.id})
-      .exec()
-      .then(doc => {
-        if (!doc) {
-          return res.status(404).json({ message: "Not found" });
-        }
-        res.status(200).json(doc);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err });
-      });
-  };
-
-  
-exports.getAllPaginate = (req, res, next) => {
-  // console.log('params', req.params)
+exports.getAllPaginate = async (req, res) => {
   const skip = parseInt(req.params.skip);
-  const limit= parseInt(req.params.limit);
+  const limit = parseInt(req.params.limit);
   const body = req.body;
-  console.log(body)
   let query = {};
   let sort = {};
-  body.name ? query.name = new RegExp(`${body.name}`,'i') : '';
-  body.sku ? query.sku = new RegExp(`${body.sku}`,'i') : '';
+  body.name ? query.name = new RegExp(`${body.name}`, 'i') : '';
+  body.sku ? query.sku = new RegExp(`${body.sku}`, 'i') : '';
   body.category ? query.category = body.category : '';
-  body.price ? query.price = {$gte: body.price.minPrice, $lte: body.price.maxPrice} : '';
+  body.price ? query.price = { $gte: body.price.minPrice, $lte: body.price.maxPrice } : '';
   body.maker ? query.maker = body.maker : '';
-  body.sort ? (body.sort === 'ASC' ? sort = {price: 1} : sort = {price: -1}) : {sku: 1};
-  console.log(sort)
-  Product.find(query)
-      .skip(skip)
-      .limit(limit)
-      .sort(sort)
-      .exec()
-      .then(docs => {
-          // console.log('other', docs)
-          res.status(200).json(docs)
-      })
-      .catch(err => {
-          res.status(500).json({ error: err });
-      });
+  body.sort ? (body.sort === 'ASC' ? sort = { price: 1 } : sort = { price: -1 }) : { sku: 1 };
+  try {
+    const products = await Product.find(query).skip(skip).limit(limit).sort(sort);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };

@@ -1,90 +1,69 @@
-const mongoose = require("mongoose");
-const Category = require("../models/category");
+const { Category } = require('../models');
 
-exports.getAll = (req, res, next) => {
-    Category.find()
-        .exec()
-        .then(docs => {
-            res.status(200).json(docs)
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
+exports.getAll = async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.create = (req, res, next) => {
-      const category = new Category({
-        _id: mongoose.Types.ObjectId(),
-        title: req.body.title,
-        parent: req.body.parent,
-        path: req.body.path,
-        status: 'ACTIVE'
-      });
-      category.save()
-        .then(result => {
-            res.status(201).json(result);
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
-};
-
-exports.get = (req, res, next) => {
-  Category.findById(req.params.id)
-    .exec()
-    .then(doc => {
-      if (!doc) {
-        return res.status(404).json({ message: "Not found" });
-      }
-      res.status(200).json(doc);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err });
+exports.create = async (req, res) => {
+  try {
+    const category = await Category.create({
+      title: req.body.title,
+      parent: req.body.parent,
+      path: req.body.path,
     });
+    res.status(201).json(category);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.update = (req, res, next) => {
-    const _id = req.params.id;
-    const body = {
-        title: req.body.title,
-        parent: req.body.parent,
-        path: req.body.path
+exports.get = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+exports.update = async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const dataCategory = {
+      title: req.body.title,
+      parent: req.body.parent,
+      path: req.body.path,
     };
-    Category.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
-      .exec()
-      .then(doc => {
-        res.status(200).json(doc);
-      })
-      .catch(err => {
-        res.status(500).json({ error: err });
-      });
+    const category = await Category.findOneAndUpdate({ _id, }, dataCategory, { new: true });
+    res.status(200).json(category);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.delete = (req, res, next) => {
-    const _id = req.params.id;
-    Category.deleteOne({ _id: _id })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                _id: _id,
-            });
-        })
-        .catch(err => {
-            res.status(500).json({ error: err });
-        });
+exports.delete = async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const category = await Category.deleteOne({ _id });
+    res.status(200).json({ _id });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
-exports.getMain = (req, res, next) => {
-  console.log('main')
-  Category.find({parent: ""})
-    .exec()
-    .then(doc => {
-      if (!doc) {
-        return res.status(404).json({ message: "Not found" });
-      }
-      res.status(200).json(doc);
-    })
-    .catch(err => {
-      res.status(500).json({ error: err });
-    });
+exports.getMain = async (req, res) => {
+  try {
+    const categories = await Category.find({ parent: '' });
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };

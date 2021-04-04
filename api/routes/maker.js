@@ -1,16 +1,12 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const MakerController = require('../controllers/maker');
+const { MakerController } = require('../controllers');
 
-router.get("/", MakerController.getAll);
-
-router.post("/", MakerController.create);
-
-router.get("/:id", MakerController.get);
-
-router.put("/:id", MakerController.update);
-
-router.delete("/:id", MakerController.delete);
+router.get('/', MakerController.getAll);
+router.post('/', MakerController.create);
+router.get('/:id', MakerController.get);
+router.put('/:id', MakerController.update);
+router.delete('/:id', MakerController.delete);
 
 module.exports = router;
