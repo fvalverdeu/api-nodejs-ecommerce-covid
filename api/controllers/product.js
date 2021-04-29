@@ -95,6 +95,7 @@ exports.delete = (req, res, next) => {
 
 exports.updateImage = (req, res, next) => {
     const _id = req.params.id;
+    const category = req.params.category;
     let images = [];
     Product.findById(_id, (error, response) => {
       console.log('product find', response)
@@ -105,7 +106,7 @@ exports.updateImage = (req, res, next) => {
       if (req.body.position === 0 || req.body.position && req.file) {
         const body = {
           position: req.body.position,
-          image: `/uploads/${_id}/${req.file.filename}`//'/uploads/' + req.file.filename
+          image: `uploads/${category}/${_id}/${req.file.filename}`//'/uploads/' + req.file.filename
         };
         if (images.length > body.position) {
           console.log('if', images);
