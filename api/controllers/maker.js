@@ -73,3 +73,25 @@ exports.delete = (req, res, next) => {
             res.status(500).json({ error: err });
         });
 };
+
+exports.getAllPaginate = (req, res, next) => {
+  const skip = parseInt(req.params.skip);
+  const limit= parseInt(req.params.limit);
+  const body = req.body;
+  console.log(body)
+  let query = {};
+  body.name ? query.name = new RegExp(`${body.name}`,'i') : '';
+  body.document ? query.document = new RegExp(`${body.document}`,'i') : '';
+  body.status ? query.status = body.status : '';
+  Maker.find(query)
+      .skip(skip)
+      .limit(limit)
+      .exec()
+      .then(docs => {
+          // console.log('other', docs)
+          res.status(200).json(docs)
+      })
+      .catch(err => {
+          res.status(500).json({ error: err });
+      });
+};

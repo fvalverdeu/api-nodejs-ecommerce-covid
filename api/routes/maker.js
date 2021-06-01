@@ -13,4 +13,6 @@ router.put("/:id", MakerController.update);
 
 router.delete("/:id", MakerController.delete);
 
+router.post("/page/:limit/:skip", MakerController.getAllPaginate);
+
 module.exports = router;

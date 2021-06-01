@@ -15,6 +15,6 @@ router.delete("/:id", CategoryController.delete);
 
 router.get("/main/list", CategoryController.getMain);
 
-
+router.post("/page/:limit/:skip", CategoryController.getAllPaginate);
 
 module.exports = router;
