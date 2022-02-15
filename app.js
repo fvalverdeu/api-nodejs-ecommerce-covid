@@ -9,6 +9,7 @@ const categoryRoutes = require('./api/routes/category');
 const productRoutes = require('./api/routes/product');
 const makerRoutes = require('./api/routes/maker');
 const minewRoutes = require('./api/routes/minew');
+const loggerRoutes = require('./api/routes/logger');
 
 const url = 'mongodb+srv://newUser:' + process.env.MONGO_ATLAS_PW + '@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
 
@@ -40,6 +41,7 @@ app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 app.use('/maker', makerRoutes);
 app.use('/minew', minewRoutes);
+app.use('/logger', loggerRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
