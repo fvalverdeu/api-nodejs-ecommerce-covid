@@ -15,6 +15,7 @@ exports.getAll = (req, res, next) => {
 exports.create = (req, res, next) => {
       const logger = new Logger({
         _id: mongoose.Types.ObjectId(),
+        date: req.body.date,
         description: req.body.description,
       });
       logger.save()

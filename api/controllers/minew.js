@@ -15,6 +15,8 @@ exports.getAll = (req, res, next) => {
 exports.create = (req, res, next) => {
       const minew = new Minew({
         _id: mongoose.Types.ObjectId(),
+        name: req.body.name,
+        mac: req.body.mac,
         description: req.body.description,
       });
       minew.save()
