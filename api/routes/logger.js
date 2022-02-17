@@ -9,4 +9,6 @@ router.post("/", LoggerController.create);
 
 router.get("/:id", LoggerController.get);
 
+router.delete("/:id", LoggerController.delete);
+
 module.exports = router;

@@ -40,3 +40,17 @@ exports.get = (req, res, next) => {
       res.status(500).json({ error: err });
     });
 };
+
+exports.delete = (req, res, next) => {
+  const _id = req.params.id;
+  Logger.deleteOne({ _id: _id })
+      .exec()
+      .then(result => {
+          res.status(200).json({
+              _id: _id,
+          });
+      })
+      .catch(err => {
+          res.status(500).json({ error: err });
+      });
+};
