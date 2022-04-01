@@ -49,7 +49,7 @@ exports.update = (req, res, next) => {
         min: req.body.min,
         max: req.body.max,
     };
-    Maker.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
+    Preparation.findOneAndUpdate({ _id: _id }, { $set: body }, {new: true})
       .exec()
       .then(doc => {
         res.status(200).json(doc);
