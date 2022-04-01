@@ -9,8 +9,4 @@ router.post("/", TemperatureController.create);
 
 router.get("/:id", TemperatureController.get);
 
-router.put("/:id", TemperatureController.update);
-
-router.delete("/:id", TemperatureController.delete);
-
 module.exports = router;
