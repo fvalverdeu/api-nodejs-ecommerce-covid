@@ -10,6 +10,9 @@ const productRoutes = require('./api/routes/product');
 const makerRoutes = require('./api/routes/maker');
 const minewRoutes = require('./api/routes/minew');
 const loggerRoutes = require('./api/routes/logger');
+const preparationRoutes = require('./api/routes/preparation');
+const temperatureRoutes = require('./api/routes/temperature');
+const calibrationRoutes = require('./api/routes/calibration');
 
 const url = 'mongodb+srv://newUser:' + process.env.MONGO_ATLAS_PW + '@cluster0.yg0rr.mongodb.net/e-commerce-covid?retryWrites=true&w=majority'
 
@@ -40,8 +43,12 @@ app.use('/user', userRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 app.use('/maker', makerRoutes);
-app.use('/minew', minewRoutes);
-app.use('/logger', loggerRoutes);
+app.use('/api/minew', minewRoutes);
+app.use('/api/logger', loggerRoutes);
+app.use('/api/preparation', preparationRoutes);
+app.use('/api/temperature', temperatureRoutes);
+app.use('/api/calibration', calibrationRoutes);
+
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
