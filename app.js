@@ -43,11 +43,11 @@ app.use('/user', userRoutes);
 app.use('/category', categoryRoutes);
 app.use('/product', productRoutes);
 app.use('/maker', makerRoutes);
-app.use('/api/minew', minewRoutes);
-app.use('/api/logger', loggerRoutes);
-app.use('/api/preparation', preparationRoutes);
-app.use('/api/temperature', temperatureRoutes);
-app.use('/api/calibration', calibrationRoutes);
+app.use('/minew', minewRoutes);
+app.use('/logger', loggerRoutes);
+app.use('/preparation', preparationRoutes);
+app.use('/temperature', temperatureRoutes);
+app.use('/calibration', calibrationRoutes);
 
 
 app.use((req, res, next) => {
