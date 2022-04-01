@@ -15,9 +15,9 @@ exports.getAll = (req, res, next) => {
 exports.create = (req, res, next) => {
       const preparation = new Preparation({
         _id: mongoose.Types.ObjectId(),
-        name: req.body.name,
-        mac: req.body.mac,
         description: req.body.description,
+        min: req.body.min,
+        max: req.body.max,
       });
       preparation.save()
         .then(result => {
