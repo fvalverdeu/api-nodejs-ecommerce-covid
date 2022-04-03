@@ -15,7 +15,6 @@ exports.getAll = (req, res, next) => {
 exports.create = (req, res, next) => {
       const calibration = new Calibration({
         _id: mongoose.Types.ObjectId(),
-        preparation: req.body.preparation,
         value: req.body.value,
         date: req.body.date,
         user: req.body.user,
