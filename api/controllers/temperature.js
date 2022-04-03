@@ -20,6 +20,7 @@ exports.create = (req, res, next) => {
         date: req.body.date,
         user: req.body.user,
         observation: req.body.observation,
+        place: req.body.place
       });
       temperature.save()
         .then(result => {

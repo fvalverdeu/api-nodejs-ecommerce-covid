@@ -7,6 +7,7 @@ const temperatureSchema = mongoose.Schema({
     date: { type: String, required: true },
     user: { type: String, required: true },
     observation: { type: String, required: true },
+    place: { type: String, required: true },
 }, {versionKey: false });
 
 module.exports = mongoose.model('Temperature', temperatureSchema);
