@@ -44,3 +44,20 @@ exports.get = (req, res, next) => {
       res.status(500).json({ error: err });
     });
 };
+
+
+exports.getFilterByDate = (req, res, next) => {
+  const body = req.body;
+  let query = {};
+  let sort = {date: 1};
+  body.date ? query.date = {$gte:ISODate(body.date.min),$lt:ISODate(body.date.max)} : '';
+  Temperature.find(query)
+      .sort(sort)
+      .exec()
+      .then(docs => {
+          res.status(200).json(docs)
+      })
+      .catch(err => {
+          res.status(500).json({ error: err });
+      });
+};
