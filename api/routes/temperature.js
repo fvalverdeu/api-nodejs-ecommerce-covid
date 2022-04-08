@@ -9,4 +9,6 @@ router.post("/", TemperatureController.create);
 
 router.get("/:id", TemperatureController.get);
 
+router.post("/filter", TemperatureController.getFilterByDate);
+
 module.exports = router;
