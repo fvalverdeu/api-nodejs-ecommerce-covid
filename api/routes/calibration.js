@@ -9,4 +9,6 @@ router.post("/", CalibrationController.create);
 
 router.get("/:id", CalibrationController.get);
 
+router.post("/filter", CalibrationController.getFilterByDate);
+
 module.exports = router;
