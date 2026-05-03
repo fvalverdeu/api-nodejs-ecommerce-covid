@@ -5,7 +5,7 @@ const mail = {
   pass: process.env.PASS_MAIL,
 };
 
-export const sendMail = async (data) => {
+const sendMail = async (data) => {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     secure: true,
@@ -28,7 +28,7 @@ export const sendMail = async (data) => {
   });
 };
 
-export const sendMailConfirmation = async (email, fullname) => {
+const sendMailConfirmation = async (email, fullname) => {
   await transporter.sendMailConfirmation({
     from: mail.user,
     to: email,
@@ -65,4 +65,9 @@ export const sendMailConfirmation = async (email, fullname) => {
             </div>
         `,
   });
+};
+
+module.exports = {
+  sendMail,
+  sendMailConfirmation,
 };
