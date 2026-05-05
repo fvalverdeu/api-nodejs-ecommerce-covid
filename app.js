@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./api/swagger");
 require("dotenv").config();
 
 const authRoutes = require("./api/routes/auth");
@@ -41,6 +43,9 @@ app.use((req, res, next) => {
 
 app.use("/uploads", express.static("uploads"));
 app.use(express.json());
+
+// Swagger documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
